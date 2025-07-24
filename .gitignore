@@ -1,0 +1,65 @@
+node_modules
+.env
+# ─── Logs & reports ─────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+report.*.json
+
+# ─── Runtime data & cache ───────────────────
+pids/
+*.pid
+*.seed
+*.pid.lock
+.cache/
+.parcel-cache/
+.rpt2_cache/
+.rts2_cache_*
+.fusebox/
+.nyc_output/
+coverage/
+node_modules/
+jspm_packages/
+bower_components/
+.web_modules/
+
+# ─── Build output ───────────────────────────
+build/Release/
+.next/
+out/
+.nuxt/
+dist/
+.vuepress/dist/
+**/.vitepress/dist/
+
+# ─── Env & config ──────────────────────────
+.env*
+.env.*.local
+.npm
+.yarn-integrity
+
+# ─── Platform & editor files ───────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.sublime-*
+
+# ─── TypeScript & linters ──────────────────
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# ─── Others ─────────────────────────────────
+.node_repl_history
+*.tgz
+.tern-port
+.dynamodb/
+.vscode-test/
+
+# ─── Local carpets ─────────────────────────────────
+/dev-guides/

@@ -3,15 +3,15 @@ import Product from '../models/Product.js';
 
 
 export const getAll = async () => {
-  // const [ total , data ] = await Promise.all([
-  //   Product.countDocuments(),
-  //   Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
-  //   // Product.find()
-  // ]);
+  const [ total , data ] = await Promise.all([
+    Product.countDocuments(),
+    Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
+    // Product.find()
+  ]);
 
-  // return { total , data };
+  return { total , data };
 
-  return await Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
+  // return await Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
 };
 
 /*

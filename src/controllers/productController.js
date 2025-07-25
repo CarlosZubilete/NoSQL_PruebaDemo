@@ -8,7 +8,7 @@ export const list = async (req, res) => {
   try {
     const result = await service.getAll();
     res.json(result);
-    //res.json({ success: true, result });
+    res.json({ success: true, result });
   } catch (error) {
     res.status(500).json({ error: 'Error to get products' });
   }
@@ -31,7 +31,7 @@ export const getById = async (req,res) => {
     const result = await service.getProductById(id); 
 
     if(!result) return res.status(404).json({ success: false, message: 'Product no found'});
-  
+    // res.json({ data: result })
     res.json({ success: true , data: result })
   } catch (e) {
     res.status(400).json({ success: false, message: 'Invalid ID' })
@@ -43,7 +43,8 @@ export const getById = async (req,res) => {
 export const create = async (req,res) => {
   try {
     const result = await service.createProduct(req.body);
-    res.status(201).json({ success: true, message: 'Product created'}); 
+    res.status(201).json({ message: 'Product created'});
+    // res.status(201).json({ success: true, message: 'Product created'}); 
     // res.status(201).json({ success: true, data: result }); 
   } catch (e) {
     res.status(400).json({ success: false, message: e.message});
@@ -75,11 +76,6 @@ export const deleteByID = async (req,res) => {
     // console.log('I am here' ,result);
     await service.deleteProduct(id, result);
     res.json({ success: true, message: 'Product deleted' });
-
-    // const producData = {
-    //   ...result.toObject(),
-    //   price: result.price * -1,
-    // } 
   } catch (e) {
       res.status(400).json({ success: false, message: 'Error deleting product'});
   }

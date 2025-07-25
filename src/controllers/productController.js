@@ -7,13 +7,11 @@ export const list = async (req, res) => {
   // res.json({ success: true, ...result });
   try {
     const result = await service.getAll();
-    //res.json(result);
-    res.json({ success: true, result });
-    console.log('result', result);
+    res.json(result);
+    //res.json({ success: true, result });
   } catch (error) {
     res.status(500).json({ error: 'Error to get products' });
   }
-
 };
 
 /* 

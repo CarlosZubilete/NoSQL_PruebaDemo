@@ -3,35 +3,16 @@ import Product from '../models/Product.js';
 
 
 export const getAll = async () => {
-    const [ total , data ] = await Promise.all([
-      Product.countDocuments(),
-      Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
-      // Product.find()
-    ]);
+  // const [ total , data ] = await Promise.all([
+  //   Product.countDocuments(),
+  //   Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
+  //   // Product.find()
+  // ]);
 
-    return { total , data };
+  // return { total , data };
+
+  return await Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
 };
-
-
-// export const listProducts = async () => {
-  
-//   const [ total, data ] = await Promise.all([
-//     Product.countDocuments(),
-//     // Product.find()
-//     Product.find({ price: { $gte: 0 } })
-//     // Product.find({ price: { $gte: 0 } }).select('-__v') // *FILTER DIRECTELY FROM DATA BASE*
-//   ]);
-
-//   const dataUptdate = data.map((product) => {
-//     const obj = product.toObject();
-//     delete obj.__v;
-//     return obj;
-//   })
-  
-//   // console.log('dataUptdate ', dataUptdate);
-//   // return { total, data };
-//   return { total, dataUptdate };
-// };
 
 /*
 export const listProducts = async ({ page = 1, limit = 10 }) => {
@@ -69,10 +50,6 @@ export const deleteProduct = async (id,payload) => {
 // Todo: Add delete physico but only administrador.
 // Todo: Add query when get all doc (false and true) but only administrador.
 
-
-
-
-
 // export const listProducts = async () => {
   
 //   const [ total, data ] = await Promise.all([
@@ -92,3 +69,6 @@ export const deleteProduct = async (id,payload) => {
 //   // return { total, data };
 //   return { total, dataUptdate };
 // };
+
+
+

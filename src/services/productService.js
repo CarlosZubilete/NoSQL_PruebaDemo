@@ -4,26 +4,21 @@ import Product from '../models/Product.js';
 
 export const getAll = async () => {
   const [ total , data ] = await Promise.all([
-    Product.countDocuments(),
+    Product.countDocuments({ deleted: false}),
     Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
-    // Product.find()
   ]);
-
   return { total , data };
-
-  // return await Product.find({ deleted: false } ).select('-__v -createdAt -updatedAt -deleted')
 };
 
-/*
-export const listProducts = async ({ page = 1, limit = 10 }) => {
+export const getPagination = async ({ page = 1, limit = 6 }) => {
   const skip = (page - 1) * limit;
   const [ total, data ] = await Promise.all([
     Product.countDocuments({ deleted: false }),
-    Product.find({ deleted: false }).skip(skip).limit(limit)
+    Product.find({ deleted: false }).select('-__v -createdAt -updatedAt -deleted').skip(skip).limit(limit)
   ]);
   return { total, page, limit, data };
 };
-*/
+
 
 export const getProductById = async (id) => {
   return Product.findById(id).select('-__v -createdAt -updatedAt -deleted');
@@ -41,8 +36,6 @@ export const updateProduct = async (id, payload) => {
 }
 
 export const deleteProduct = async (id,payload) => {
-  // console.log('Services: ', payload);
-  // console.log('Services_id: ', id);
   return Product.findByIdAndUpdate(id, payload, { new: true });
 }
 
@@ -69,6 +62,4 @@ export const deleteProduct = async (id,payload) => {
 //   // return { total, data };
 //   return { total, dataUptdate };
 // };
-
-
 

@@ -3,7 +3,7 @@ import * as ctrl from '../controllers/productController.js';
 
 const router = Router();
 
-router.get('/', ctrl.list);
+router.get('/', ctrl.getProducts);
 router.get('/:id', ctrl.getById);
 router.post('/', ctrl.create); 
 router.patch('/:id', ctrl.update);

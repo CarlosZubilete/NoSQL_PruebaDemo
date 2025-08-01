@@ -29,7 +29,7 @@ export const getProducts = async (req, res) => {
 
 
 export const getById = async (req,res) => {
-  const{id} = req.params;
+  const { id } = req.params;
   try {
     const result = await service.getProductById(id); 
     if(!result) return res.status(404).json({ success: false, message: 'Product no found'});
@@ -51,10 +51,9 @@ export const create = async (req,res) => {
   }
 };
 
+
 export const update = async (req, res) => {
-  
-  const {id} = req.params;
-  // There's not validation:
+  const { id } = req.params;
   try {
     const result = await service.updateProduct(id, req.body);
     if(!result) return res.status(404).json({ success: false, message: 'Product no found'});
@@ -64,13 +63,13 @@ export const update = async (req, res) => {
   }
 };
 
+
 export const deleteByID = async (req,res) => {
   const {id} = req.params; 
-  try{
+  try {
     let result = await service.getProductById(id); // retorn a object.
     if (!result)  return res.status(404).json({ success: false, message: 'Product no found'});   
     result.deleted = true;
-    // console.log('I am here' ,result);
     await service.deleteProduct(id, result);
     res.json({ success: true, message: 'Product deleted' });
   } catch (e) {

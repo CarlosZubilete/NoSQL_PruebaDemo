@@ -1,4 +1,3 @@
-// !Reciben req/res, llaman a servicios y formatean la respuesta:
 import * as service from "../services/productService.js";
 
 export const getProducts = async (req, res) => {

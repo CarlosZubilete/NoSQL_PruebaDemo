@@ -1,4 +1,4 @@
-export const getOrder = (order) => {
+export const getOrderBy = (order) => {
   if (!order) return {}; // early return
   const validProps = ["name", "age", "clientType"];
   const sortObject = {};
@@ -22,12 +22,3 @@ export const getOrder = (order) => {
 
   return sortObject;
 };
-
-// if order has a point and coma , they have more values
-// const separateOrder = order.split(";");
-// console.log("Separate Order = ", separateOrder); // [propieda=valor]
-
-// return {
-//   prop: prop || "age",
-//   value: value === -1 ? -1 : 1, //  -1 o 1
-// };

@@ -1,15 +1,5 @@
-// !Functions are talking with Database and encapsulate the logic.
+// *Functions are talking with Database and encapsulate the logic.*
 import Client from "../models/Client.js";
-
-// export const listClient = async () => {
-//   const [total, data] = await Promise.all([
-//     Client.countDocuments({ deleted: false }),
-//     Client.find({ deleted: false })
-//       .select("-__v -createdAt -updatedAt -deleted")
-//       .populate("clientType"),
-//   ]);
-//   return { total, data };
-// };
 
 export const listClient = async (order = {}) => {
   const [total, data] = await Promise.all([
@@ -38,7 +28,3 @@ export const updateClient = async (id, payload) => {
     "clientType"
   );
 };
-
-// export const deleteClient = async (payload) => {
-//   console.log( 'Payload', payload);
-// }

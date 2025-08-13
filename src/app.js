@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import productRoutes from "./features/products/routes/productRouter.js";
-import clientRoutes from "./routes/clientRoutes.js";
-import clientTypeRoutes from "./routes/clientTypeRoutes.js";
+import clientRoutes from "./features/clients/routes/clientRoutes.js";
+import clientTypeRoutes from "./features/clients-types/routes/clientTypeRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -18,4 +18,4 @@ app.use("/clients", clientRoutes);
 app.use("/clientsTypes", clientTypeRoutes);
 
 export default app;
-// console.log('Hola desde app.js')
+// console.log('Hola from app.js')

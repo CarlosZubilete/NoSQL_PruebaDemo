@@ -1,11 +1,12 @@
 // !They receive requests, call services and format the response:
 import * as service from "../services/clientService.js";
-import { getByIdClientType } from "../services/clientTypeService.js";
-import { getOrder } from "../utils/clientFilter.js";
+// import { getByIdClientType } from "../services/clientTypeService.js";
+import { getByIdClientType } from "../../clients-types/services/clientTypeService.js";
+import { getOrderBy } from "../utils/clientFilter.js";
 
 export const list = async (req, res) => {
-  const { order } = req.query;
-  const sortParams = getOrder(order);
+  const { orderBy } = req.query;
+  const sortParams = getOrderBy(orderBy);
   try {
     const result = await service.listClient(sortParams);
     res.json(result);

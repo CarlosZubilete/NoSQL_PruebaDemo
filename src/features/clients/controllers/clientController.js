@@ -1,14 +1,25 @@
 // !They receive requests, call services and format the response:
+// todo: Also to do filters about idClientType...
 import * as service from "../services/clientService.js";
 // import { getByIdClientType } from "../services/clientTypeService.js";
 import { getByIdClientType } from "../../clients-types/services/clientTypeService.js";
-import { getOrderBy } from "../utils/clientFilter.js";
+import { getOrderBy, getSelect } from "../utils/clientFilter.js";
+
+/*  
+  1. max=x; 
+  2. min=y;
+  3. [min=x,max=x]
+*/
 
 export const list = async (req, res) => {
   const { orderBy } = req.query;
+  const { ageMin } = req.query;
+  const { ageMax } = req.query;
+
+  const selectAge = getSelect(ageMin, ageMax);
   const sortParams = getOrderBy(orderBy);
   try {
-    const result = await service.listClient(sortParams);
+    const result = await service.listClient(sortParams, selectAge);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: "Error to get client" });

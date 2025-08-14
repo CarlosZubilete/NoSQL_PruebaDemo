@@ -1,23 +1,24 @@
 // !They receive requests, call services and format the response:
 // todo: Also to do filters about idClientType...
 import * as service from "../services/clientService.js";
-// import { getByIdClientType } from "../services/clientTypeService.js";
 import { getByIdClientType } from "../../clients-types/services/clientTypeService.js";
 import { getOrderBy, getSelect } from "../utils/clientFilter.js";
-
-/*  
-  1. max=x; 
-  2. min=y;
-  3. [min=x,max=x]
-*/
+import { clientFilterSchema } from "../validators/clientFilterSchema.js";
 
 export const list = async (req, res) => {
-  const { orderBy } = req.query;
-  const { ageMin } = req.query;
-  const { ageMax } = req.query;
+  const { orderBy, ageMin, ageMax } = req.query;
+
+  const { error, value } = clientFilterSchema.validate({
+    orderBy: orderBy?.split(";").map((item) => item.split("=")[0]),
+    min: ageMax,
+    max: ageMax,
+  });
+  if (error) return res.status(400).json({ error: error.details[0].message });
+  // console.log("values.orderBy ", value.orderBy);
 
   const selectAge = getSelect(ageMin, ageMax);
   const sortParams = getOrderBy(orderBy);
+
   try {
     const result = await service.listClient(sortParams, selectAge);
     res.json(result);
@@ -115,4 +116,22 @@ const getOrder = (order) => {
   sort[split[0]] = Number(split[1]);
   return sort;
 };
+*/
+
+/* 
+export const list = async (req, res) => {
+  const { orderBy } = req.query;
+  const { ageMin } = req.query;
+  const { ageMax } = req.query;
+
+  const selectAge = getSelect(ageMin, ageMax);
+  const sortParams = getOrderBy(orderBy);
+  try {
+    const result = await service.listClient(sortParams, selectAge);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Error to get client" });
+  }
+};
+
 */

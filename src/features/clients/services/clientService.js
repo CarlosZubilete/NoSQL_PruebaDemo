@@ -1,4 +1,5 @@
 // *Functions are talking with Database and encapsulate the logic.*
+// todo: Create a new Schema for validations
 import Client from "../models/Client.js";
 
 export const listClient = async (order = {}, age = {}) => {

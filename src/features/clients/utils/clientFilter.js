@@ -1,10 +1,8 @@
+// import { clientFilterSchema } from "../validators/clientFilterSchema";
+
 export const getSelect = (min, max) => {
   if (!min && !max) return {};
-  // max -> min -> max
-
-  // const parts = select.split(";");
   let selectObject = {};
-
   if (min && max && min === max) {
     selectObject = { $eq: Number(max) };
   } else {
@@ -18,22 +16,31 @@ export const getSelect = (min, max) => {
       }
     }
   }
-  // const validProps = ["age"];
-  console.log("Min", min, "; max = ", max);
-  console.log("selectObject  = ", selectObject);
-
-  // const selectAge = { age: { selectObject } };
-  // console.log("select ", selectAge);
-
+  // console.log("Min", min, "; max = ", max);
+  // console.log("selectObject  = ", selectObject);
   return selectObject;
 };
 
 export const getOrderBy = (order) => {
   if (!order) return {}; // early return
-  const validProps = ["name", "age", "clientType"];
   const sortObject = {};
   const parts = order.split(";");
+  parts.forEach((part) => {
+    const [prop, val] = part.split("=");
+    const value = Number(val);
+    if (
+      prop && // prop doesn't have got empty
+      (value === 1 || value == -1)
+    ) {
+      sortObject[prop.trim()] = value;
+      // console.log("sortObject = ", sortObject);
+    }
+  });
+  return sortObject;
+};
 
+/*
+  const validProps = ["name", "age", "clientType"];
   console.log("Parts = ", parts);
   console.log("Parts length ", parts.length);
 
@@ -50,5 +57,4 @@ export const getOrderBy = (order) => {
     }
   });
 
-  return sortObject;
-};
+*/
